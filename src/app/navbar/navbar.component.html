@@ -1,0 +1,28 @@
+<nav class="navbar-toggleable-sm fixed-top navbar navbar-inverse bg-primary" xmlns="http://www.w3.org/1999/html">
+  <div class="container">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler"
+            ria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarToggler">
+      <a class="navbar-brand" [routerLink]="['/welcome']" [innerHTML]="appName"></a>
+	    <ul class="nav navbar-nav mr-auto" *ngIf="authService.authenticated">
+		    <li class="nav-item" *ngFor="let item of navItems">
+			    <a class="nav-link" [routerLink]="[item.href]" [routerLinkActive]="['active']">{{item.label}}</a>
+        </li>
+      </ul>
+
+	    <button class="btn btn-outline-success ml-auto mr-3"
+	            [routerLink]="['/login']"
+	            *ngIf="!authService.authenticated">Login
+	    </button>
+
+	    <button class="btn btn-outline-warning my-2 my-sm-0"
+	            (click)="logout()"
+	            *ngIf="authService.authenticated">Logout
+	    </button>
+
+	    <db-cart-menu *ngIf="authService.authenticated"></db-cart-menu>
+    </div>
+  </div>
+</nav>
